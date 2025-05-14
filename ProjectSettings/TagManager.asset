@@ -5,11 +5,15 @@ TagManager:
   serializedVersion: 3
   tags:
   - Sword
+  - Sword1
+  - Player1
+  - Background
+  - Platforms
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Platform
   - Water
   - UI
   - 
@@ -41,6 +45,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3294761917
+    locked: 0
+  - name: Platforms
+    uniqueID: 2400747537
+    locked: 0
+  - name: Player
+    uniqueID: 1695466779
     locked: 0
   m_RenderingLayers:
   - Default

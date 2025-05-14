@@ -7,12 +7,14 @@ public class BanditPlayer1 : MonoBehaviour
     [SerializeField] float m_speed = 4.0f;
     [SerializeField] float m_jumpForce = 7.5f;
 
+    public float m_reboundForce = 15.0f;
+
     private Animator m_animator;
     private Rigidbody2D m_body2d;
     private Sensor_Bandit m_groundSensor;
     private bool m_grounded = false;
     private bool m_combatIdle = false;
-    private bool m_isDead = false;
+    private bool HitReceived;
 
     // Use this for initialization
     void Start()
@@ -53,30 +55,21 @@ public class BanditPlayer1 : MonoBehaviour
         else if (inputX < 0)
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-        // Move
-        m_body2d.linearVelocity = new Vector2(inputX * m_speed, m_body2d.linearVelocity.y);
+        // ? No se mueve si est� golpeado
+        if (!HitReceived)
+        {
+            m_body2d.linearVelocity = new Vector2(inputX * m_speed, m_body2d.linearVelocity.y);
+        }
 
         //Set AirSpeed in animator
         m_animator.SetFloat("AirSpeed", m_body2d.linearVelocity.y);
 
         // -- Handle Animations --
-        //Death
-        if (Input.GetKeyDown("e"))
-        {
-            if (!m_isDead)
-                m_animator.SetTrigger("Death");
-            else
-                m_animator.SetTrigger("Recover");
-
-            m_isDead = !m_isDead;
-        }
-
         //Hurt
-        else if (Input.GetKeyDown("q"))
-            m_animator.SetTrigger("Hurt");
+        m_animator.SetBool("HitReceived", HitReceived);
 
         //Attack
-        else if (Input.GetKeyDown("s"))
+        if (Input.GetKeyDown("s"))
         {
             m_animator.SetTrigger("Attack");
         }
@@ -107,4 +100,44 @@ public class BanditPlayer1 : MonoBehaviour
         else
             m_animator.SetInteger("AnimState", 0);
     }
+    
+    public void Damage1(Vector2 direction, int damage)
+    {
+        if (!HitReceived)
+        {
+            HitReceived = true;
+
+            // ? Rebote horizontal dependiendo del lado del atacante
+            float xDir = transform.position.x < direction.x ? -1f : 1f;
+            Vector2 rebound = new Vector2(xDir, 0f);
+            m_body2d.AddForce(rebound * m_reboundForce, ForceMode2D.Impulse);
+        }
+    }
+
+    public void DeactivateDamage1()
+    {
+        HitReceived = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Sword"))
+        {
+            // Intentamos obtener el componente BanditPlayer1 desde el objeto padre de la espada
+            BanditPlayer2 banditPlayer = collision.gameObject.GetComponentInParent<BanditPlayer2>();
+
+            // Verificamos si el componente BanditPlayer1 existe (es decir, si la espada es del jugador correcto)
+            if (banditPlayer != null)
+            {
+                // Llamamos a Damage2 en BanditPlayer2 cuando la espada del BanditPlayer1 lo toca
+                Vector2 directionDamage = new Vector2(collision.gameObject.transform.position.x, 0);
+                Damage1(directionDamage, 1); // Llamamos a Damage2 para que BanditPlayer2 reciba el daño
+            }
+            else
+            {
+                Debug.LogWarning("El objeto con etiqueta 'Sword' no tiene el componente BanditPlayer1.");
+            }
+        }
+    }
+    
 }

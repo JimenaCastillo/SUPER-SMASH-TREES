@@ -1,22 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\PC MASTER\\Desktop\\Proyecto2Datos\\SUPERSMASHTREES\\",
+  "WorkspaceRootPath": "C:\\Users\\PC MASTER\\Desktop\\SUPERSMASHTREES\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4ED9300B-C896-2936-28A3-7B72DD2FEAAD}|Assembly-CSharp.csproj|c:\\users\\pc master\\desktop\\proyecto2datos\\supersmashtrees\\assets\\scripts\\banditplayer1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4ED9300B-C896-2936-28A3-7B72DD2FEAAD}|Assembly-CSharp.csproj|C:\\Users\\PC MASTER\\Desktop\\SUPERSMASHTREES\\assets\\scripts\\banditplayer1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4ED9300B-C896-2936-28A3-7B72DD2FEAAD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\banditplayer1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4ED9300B-C896-2936-28A3-7B72DD2FEAAD}|Assembly-CSharp.csproj|C:\\Users\\PC MASTER\\Desktop\\Proyecto2Datos\\SUPERSMASHTREES\\assets\\scripts\\banditplayer2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4ED9300B-C896-2936-28A3-7B72DD2FEAAD}|Assembly-CSharp.csproj|c:\\users\\pc master\\desktop\\supersmashtrees\\assets\\scripts\\banditplayer2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4ED9300B-C896-2936-28A3-7B72DD2FEAAD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\banditplayer2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4ED9300B-C896-2936-28A3-7B72DD2FEAAD}|Assembly-CSharp.csproj|C:\\Users\\PC MASTER\\Desktop\\Proyecto2Datos\\SUPERSMASHTREES\\assets\\scripts\\bandit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4ED9300B-C896-2936-28A3-7B72DD2FEAAD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\bandit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\PC MASTER\\Desktop\\Proyecto2Datos\\SUPERSMASHTREES\\assets\\scripts\\menu\\menusystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:assets\\scripts\\menu\\menusystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4ED9300B-C896-2936-28A3-7B72DD2FEAAD}|Assembly-CSharp.csproj|C:\\Users\\PC MASTER\\Desktop\\SUPERSMASHTREES\\assets\\scripts\\levelgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ED9300B-C896-2936-28A3-7B72DD2FEAAD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\levelgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -41,57 +37,46 @@
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "BanditPlayer1.cs",
-              "DocumentMoniker": "C:\\Users\\PC MASTER\\Desktop\\Proyecto2Datos\\SUPERSMASHTREES\\Assets\\Scripts\\BanditPlayer1.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\BanditPlayer1.cs",
-              "ToolTip": "C:\\Users\\PC MASTER\\Desktop\\Proyecto2Datos\\SUPERSMASHTREES\\Assets\\Scripts\\BanditPlayer1.cs",
-              "RelativeToolTip": "Assets\\Scripts\\BanditPlayer1.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAowDUAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T07:15:01.594Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LevelGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\PC MASTER\\Desktop\\SUPERSMASHTREES\\Assets\\Scripts\\LevelGenerator.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\LevelGenerator.cs",
+              "ToolTip": "C:\\Users\\PC MASTER\\Desktop\\SUPERSMASHTREES\\Assets\\Scripts\\LevelGenerator.cs",
+              "RelativeToolTip": "Assets\\Scripts\\LevelGenerator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD4AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T21:41:04.06Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "BanditPlayer2.cs",
-              "DocumentMoniker": "C:\\Users\\PC MASTER\\Desktop\\Proyecto2Datos\\SUPERSMASHTREES\\Assets\\Scripts\\BanditPlayer2.cs",
+              "DocumentMoniker": "C:\\Users\\PC MASTER\\Desktop\\SUPERSMASHTREES\\Assets\\Scripts\\BanditPlayer2.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\BanditPlayer2.cs",
-              "ToolTip": "C:\\Users\\PC MASTER\\Desktop\\Proyecto2Datos\\SUPERSMASHTREES\\Assets\\Scripts\\BanditPlayer2.cs",
+              "ToolTip": "C:\\Users\\PC MASTER\\Desktop\\SUPERSMASHTREES\\Assets\\Scripts\\BanditPlayer2.cs",
               "RelativeToolTip": "Assets\\Scripts\\BanditPlayer2.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAowC8AAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T07:15:15.65Z"
+              "WhenOpened": "2025-05-05T07:15:15.65Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Bandit.cs",
-              "DocumentMoniker": "C:\\Users\\PC MASTER\\Desktop\\Proyecto2Datos\\SUPERSMASHTREES\\Assets\\Scripts\\Bandit.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Bandit.cs",
-              "ToolTip": "C:\\Users\\PC MASTER\\Desktop\\Proyecto2Datos\\SUPERSMASHTREES\\Assets\\Scripts\\Bandit.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Bandit.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAowDUAAABBAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "BanditPlayer1.cs",
+              "DocumentMoniker": "C:\\Users\\PC MASTER\\Desktop\\SUPERSMASHTREES\\Assets\\Scripts\\BanditPlayer1.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\BanditPlayer1.cs",
+              "ToolTip": "C:\\Users\\PC MASTER\\Desktop\\SUPERSMASHTREES\\Assets\\Scripts\\BanditPlayer1.cs",
+              "RelativeToolTip": "Assets\\Scripts\\BanditPlayer1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T07:48:18.456Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MenuSystem.cs",
-              "DocumentMoniker": "C:\\Users\\PC MASTER\\Desktop\\Proyecto2Datos\\SUPERSMASHTREES\\Assets\\Scripts\\Menu\\MenuSystem.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Menu\\MenuSystem.cs",
-              "ToolTip": "C:\\Users\\PC MASTER\\Desktop\\Proyecto2Datos\\SUPERSMASHTREES\\Assets\\Scripts\\Menu\\MenuSystem.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Menu\\MenuSystem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T02:57:30.911Z"
+              "WhenOpened": "2025-05-05T07:15:01.594Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -10,8 +10,7 @@ public class MenuSystem : MonoBehaviour
 
     public void Jugar()
     {
-        int escenaAleatoria = UnityEngine.Random.Range(escenaMin, escenaMax + 1);
-        SceneManager.LoadScene(escenaAleatoria);
+        SceneManager.LoadScene("Map");
     }
 
     public void Salir()

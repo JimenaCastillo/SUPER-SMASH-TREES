@@ -9,7 +9,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{4ED9300B-C896-2936-28A3-7B72DD2FEAAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -61,11 +62,32 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.47f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Bandit.cs" />
+    <Compile Include="Assets\Scripts\BanditPlayer1.cs" />
+    <Compile Include="Assets\Scripts\BanditPlayer2.cs" />
+    <Compile Include="Assets\Scripts\Challenges\Challenge.cs" />
+    <Compile Include="Assets\Scripts\Challenges\ChallengeManager.cs" />
+    <Compile Include="Assets\Scripts\Challenges\Token.cs" />
+    <Compile Include="Assets\Scripts\Challenges\TokenSpawner.cs" />
+    <Compile Include="Assets\Scripts\CheckGround.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\LevelGenerator.cs" />
+    <Compile Include="Assets\Scripts\MenuSystem.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Powers\PowerupManager.cs" />
+    <Compile Include="Assets\Scripts\Powers\ShieldEffect.cs" />
+    <Compile Include="Assets\Scripts\Sensor_Bandit.cs" />
+    <Compile Include="Assets\Scripts\Sword.cs" />
+    <Compile Include="Assets\Scripts\Trees\AVLTree.cs" />
+    <Compile Include="Assets\Scripts\Trees\BinarySearchTree.cs" />
+    <Compile Include="Assets\Scripts\Trees\BTreeNode.cs" />
+    <Compile Include="Assets\Scripts\Trees\TreeNode.cs" />
+    <Compile Include="Assets\Scripts\UI\TreeVisualizer.cs" />
+    <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
-    <Compile Include="Assets\Scripts\BanditPlayer1.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
@@ -82,29 +104,59 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
-    <Compile Include="Assets\Scripts\MenuSystem.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\Scripts\Sensor_Bandit.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
-    <Compile Include="Assets\Scripts\CheckGround.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
-    <Compile Include="Assets\Scripts\Bandit.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
-    <Compile Include="Assets\Scripts\LevelGenerator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-    <Compile Include="Assets\Scripts\Sword.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
-    <Compile Include="Assets\Scripts\BanditPlayer2.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Scripts\Bandit.cs.meta" />
+    <None Include="Assets\Scripts\BanditPlayer1.cs.meta" />
+    <None Include="Assets\Scripts\BanditPlayer2.cs.meta" />
+    <None Include="Assets\Scripts\Challenges.meta" />
+    <None Include="Assets\Scripts\Challenges\Challenge.cs.meta" />
+    <None Include="Assets\Scripts\Challenges\ChallengeManager.cs.meta" />
+    <None Include="Assets\Scripts\Challenges\ChallengeManager.prefab" />
+    <None Include="Assets\Scripts\Challenges\ChallengeManager.prefab.meta" />
+    <None Include="Assets\Scripts\Challenges\Token.cs.meta" />
+    <None Include="Assets\Scripts\Challenges\TokenSpawner.cs.meta" />
+    <None Include="Assets\Scripts\Challenges\TokenSpawner.prefab" />
+    <None Include="Assets\Scripts\Challenges\TokenSpawner.prefab.meta" />
+    <None Include="Assets\Scripts\CheckGround.cs.meta" />
+    <None Include="Assets\Scripts\GameManager.cs.meta" />
+    <None Include="Assets\Scripts\LevelGenerator.cs.meta" />
+    <None Include="Assets\Scripts\MenuSystem.cs.meta" />
+    <None Include="Assets\Scripts\Player.meta" />
+    <None Include="Assets\Scripts\Player\PlayerController.cs.meta" />
+    <None Include="Assets\Scripts\Powers.meta" />
+    <None Include="Assets\Scripts\Powers\AirJumpEffectPrefab.prefab" />
+    <None Include="Assets\Scripts\Powers\AirJumpEffectPrefab.prefab.meta" />
+    <None Include="Assets\Scripts\Powers\PowerupManager.cs.meta" />
+    <None Include="Assets\Scripts\Powers\ShieldEffect.cs.meta" />
+    <None Include="Assets\Scripts\Powers\ShieldEffectPrefab.prefab" />
+    <None Include="Assets\Scripts\Powers\ShieldEffectPrefab.prefab.meta" />
+    <None Include="Assets\Scripts\Sensor_Bandit.cs.meta" />
+    <None Include="Assets\Scripts\Sword.cs.meta" />
+    <None Include="Assets\Scripts\Trees.meta" />
+    <None Include="Assets\Scripts\Trees\AVLTree.cs.meta" />
+    <None Include="Assets\Scripts\Trees\BinarySearchTree.cs.meta" />
+    <None Include="Assets\Scripts\Trees\BTreeNode.cs.meta" />
+    <None Include="Assets\Scripts\Trees\TreeNode.cs.meta" />
+    <None Include="Assets\Scripts\UI.meta" />
+    <None Include="Assets\Scripts\UI\TreeNodePrefab.prefab" />
+    <None Include="Assets\Scripts\UI\TreeNodePrefab.prefab.meta" />
+    <None Include="Assets\Scripts\UI\TreeVisualizer.cs.meta" />
+    <None Include="Assets\Scripts\UI\UIManager.cs.meta" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Roboto-Bold - License.txt" />

@@ -20,8 +20,14 @@ public class PowerupManager : MonoBehaviour
     private Dictionary<int, GameObject> shieldEffects = new Dictionary<int, GameObject>();
     private Dictionary<int, bool> airJumpAvailable = new Dictionary<int, bool>();
 
-    private void Start()
+    private IEnumerator Start()
     {
+        // Esperar a que GameManager se inicialice
+        while (GameManager.Instance == null)
+        {
+            yield return null;
+        }
+
         int playerCount = GameManager.Instance.GetPlayerCount();
         for (int i = 0; i < playerCount; i++)
         {

@@ -8,9 +8,11 @@ public class Token : MonoBehaviour
     [SerializeField] private TextMeshPro valueText;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    private int value;
+    public int value { get; private set; }
     private float fallSpeed;
     private bool isCollected = false;
+    private bool isDestroyed = false;
+    
 
     public void Initialize(int value, float fallSpeed)
     {
@@ -25,11 +27,14 @@ public class Token : MonoBehaviour
         {
             transform.Translate(Vector3.down * fallSpeed * Time.deltaTime);
 
-            // Destroy if out of screen
+            // Si el token cae fuera de la pantalla
             if (transform.position.y < -6f)
             {
-                FindObjectOfType<TokenSpawner>().RemoveToken(this);
-                Destroy(gameObject);
+                TokenSpawner spawner = FindObjectOfType<TokenSpawner>();
+                if (spawner != null)
+                    spawner.RemoveToken(this);
+
+                SafeDestroy();
             }
         }
     }
@@ -43,11 +48,10 @@ public class Token : MonoBehaviour
         {
             isCollected = true;
 
-            // Notify challenge manager
-            ChallengeManager challengeManager = FindObjectOfType<ChallengeManager>();
-            challengeManager.CollectToken(player.GetPlayerIndex(), value);
+            // 1. Notifica al ChallengeManager para insertar el valor
+            ChallengeManager.Instance.CollectToken(player.GetPlayerIndex(), value);
 
-            // Visual feedback
+            // 2. Da feedback visual
             StartCoroutine(CollectAnimation(player.transform));
         }
     }
@@ -55,19 +59,34 @@ public class Token : MonoBehaviour
     private IEnumerator CollectAnimation(Transform target)
     {
         float duration = 0.5f;
-        float elapsed = 0;
+        float elapsed = 0f;
         Vector3 startPos = transform.position;
 
         while (elapsed < duration)
         {
             transform.position = Vector3.Lerp(startPos, target.position, elapsed / duration);
             spriteRenderer.color = new Color(1, 1, 1, 1 - (elapsed / duration));
-
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        FindObjectOfType<TokenSpawner>().RemoveToken(this);
-        Destroy(gameObject);
+        // 3. Quita el token de la lista activa y destruye el objeto
+        TokenSpawner spawner = FindObjectOfType<TokenSpawner>();
+        if (spawner != null)
+            spawner.RemoveToken(this);
+
+        SafeDestroy();
+    }
+
+    private void SafeDestroy()
+    {
+        if (isDestroyed) return;
+        isDestroyed = true;
+
+        spriteRenderer.enabled = false;
+        if (valueText != null) valueText.enabled = false;
+        gameObject.SetActive(false);
+
+        Destroy(gameObject); // Elimina el objeto después
     }
 }

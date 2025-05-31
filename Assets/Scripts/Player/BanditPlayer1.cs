@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
-public class BanditPlayer1 : MonoBehaviour
+public class BanditPlayer1 : MonoBehaviour, IPlayer
 {
 
     [SerializeField] float m_speed = 4.0f;
     [SerializeField] float m_jumpForce = 7.5f;
+    [SerializeField] private int playerIndex;
 
     public float m_reboundForce = 15.0f;
 
@@ -100,7 +102,7 @@ public class BanditPlayer1 : MonoBehaviour
         else
             m_animator.SetInteger("AnimState", 0);
     }
-    
+
     public void Damage1(Vector2 direction, int damage)
     {
         if (!HitReceived)
@@ -123,21 +125,51 @@ public class BanditPlayer1 : MonoBehaviour
     {
         if (collision.CompareTag("Sword"))
         {
-            // Intentamos obtener el componente BanditPlayer1 desde el objeto padre de la espada
+            // Intentamos obtener el componente BanditPlayer2 desde el objeto padre de la espada
             BanditPlayer2 banditPlayer = collision.gameObject.GetComponentInParent<BanditPlayer2>();
 
-            // Verificamos si el componente BanditPlayer1 existe (es decir, si la espada es del jugador correcto)
             if (banditPlayer != null)
             {
-                // Llamamos a Damage2 en BanditPlayer2 cuando la espada del BanditPlayer1 lo toca
+                // Llamamos a Damage1 para que BanditPlayer1 reciba el daño
                 Vector2 directionDamage = new Vector2(collision.gameObject.transform.position.x, 0);
-                Damage1(directionDamage, 1); // Llamamos a Damage2 para que BanditPlayer2 reciba el daño
+                Damage1(directionDamage, 1);
             }
             else
             {
-                Debug.LogWarning("El objeto con etiqueta 'Sword' no tiene el componente BanditPlayer1.");
+                Debug.LogWarning("El objeto con etiqueta 'Sword' no tiene el componente BanditPlayer2.");
             }
         }
+        else if (collision.CompareTag("Token"))
+        {
+            int tokenValue = collision.GetComponent<Token>().value;
+            OnTokenCollected(tokenValue);  // Llamas al método de la interfaz
+            Destroy(collision.gameObject);
+        }
     }
-    
+
+    public void OnTokenCollected(int tokenValue)
+    {
+        // Aquí defines qué hacer cuando el jugador recolecta un token
+        // Por ejemplo, insertar el valor en el árbol:
+
+        int playerIndex = GetPlayerIndex();  // o un índice fijo si es un solo jugador
+        ChallengeManager.Instance.CollectToken(playerIndex, tokenValue);
+    }
+
+
+    public int GetPlayerIndex()
+    {
+        return 0;
+    }
+
+    public Vector2 GetFacingDirection()
+    {
+        return transform.localScale.x > 0 ? Vector2.left : Vector2.right;
+    }
+
+    public void AddForce(Vector2 force)
+    {
+        m_body2d.AddForce(force, ForceMode2D.Impulse);
+    }
+
 }

@@ -27,29 +27,74 @@ public class ChallengeManager : MonoBehaviour
         new Challenge(TreeType.BTree, "nodes", 6)
     };
 
-    private void Start()
+
+    public static ChallengeManager Instance { get; private set; }
+
+    private void Awake()
     {
-        playerTrees = new ITree[GameManager.Instance.GetPlayerCount()];
-        playerScores = new int[GameManager.Instance.GetPlayerCount()];
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        int playerCount = 2;
+        if (GameManager.Instance != null)
+            playerCount = GameManager.Instance.GetPlayerCount();
+
+        playerTrees = new ITree[playerCount];
+        playerScores = new int[playerCount];
         InitializeTrees();
+    }
+    private IEnumerator Start()
+    {
+        while (GameManager.Instance == null)
+        {
+            yield return null;
+        }
+
+        
         StartNewChallenge();
         StartCoroutine(SpawnTokensRoutine());
     }
 
     private void Update()
     {
-        if (challengeActive)
+        if (!challengeActive || playerTrees == null || treeVisualizers == null)
+            return;
+
+        CheckChallengeCompletion();
+
+        if (treeVisualizers == null)
         {
-            CheckChallengeCompletion();
+            Debug.LogError("treeVisualizers es null!");
+            return;
         }
 
-        // Update tree visualizers
         for (int i = 0; i < playerTrees.Length; i++)
         {
-            if (treeVisualizers[i] != null && playerTrees[i] != null)
+            if (i >= treeVisualizers.Length)
             {
-                treeVisualizers[i].UpdateTreeVisualization(playerTrees[i]);
+                Debug.LogWarning($"treeVisualizers no tiene índice {i}. Longitud: {treeVisualizers.Length}");
+                continue;
             }
+
+            if (treeVisualizers[i] == null)
+            {
+                Debug.LogWarning($"treeVisualizers[{i}] es null.");
+                continue;
+            }
+
+            if (playerTrees[i] == null)
+            {
+                Debug.LogWarning($"playerTrees[{i}] es null.");
+                continue;
+            }
+
+            treeVisualizers[i].UpdateTreeVisualization(playerTrees[i]);
         }
     }
 
@@ -136,12 +181,42 @@ public class ChallengeManager : MonoBehaviour
         }
     }
 
-    public void CollectToken(int playerIndex, int tokenValue)
-    {
-        if (playerTrees[playerIndex] != null && challengeActive)
+    public void CollectToken(int playerIndex, int value)
+{
+        if (playerTrees == null)
         {
-            playerTrees[playerIndex].Insert(tokenValue);
-            uiManager.ShowTokenCollected(playerIndex, tokenValue);
+            Debug.LogError("playerTrees no ha sido inicializado.");
+            return;
         }
+
+        if (playerIndex < 0 || playerIndex >= playerTrees.Length)
+        {
+            Debug.LogWarning($"Índice de jugador inválido: {playerIndex}");
+            return;
+        }
+
+        if (playerTrees[playerIndex] == null)
+        {
+            Debug.LogError($"El árbol del jugador {playerIndex} es null.");
+            return;
+        }
+
+        playerTrees[playerIndex].Insert(value);
+
+        
+
+        if (playerIndex < treeVisualizers.Length && treeVisualizers[playerIndex] != null)
+        {
+            treeVisualizers[playerIndex].UpdateTreeVisualization(playerTrees[playerIndex]);
+
+        }
+        else
+        {
+            Debug.LogWarning($"No hay TreeVisualizer asignado para el jugador {playerIndex}");
+        }
+        playerScores[playerIndex] += 10;
+        Debug.Log($"Jugador {playerIndex} ha ganado 10 puntos. Total: {playerScores[playerIndex]}");
+        uiManager.UpdateScores(playerScores);
     }
+    
 }

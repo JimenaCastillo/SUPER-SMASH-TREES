@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class BanditPlayer2 : MonoBehaviour
+public class BanditPlayer2 : MonoBehaviour, IPlayer
 {
     [SerializeField] float m_speed = 4.0f;
     [SerializeField] float m_jumpForce = 7.5f;
-    
+    [SerializeField] private int playerIndex;
+
     public float m_reboundForce = 15.0f; 
 
     private Animator m_animator;
@@ -126,5 +127,36 @@ public class BanditPlayer2 : MonoBehaviour
                 Debug.LogWarning("El objeto con etiqueta 'Sword' no tiene el componente BanditPlayer1.");
             }
         }
+        else if (collision.CompareTag("Token"))
+        {
+            int tokenValue = collision.GetComponent<Token>().value;
+            OnTokenCollected(tokenValue);  // Llamas al método de la interfaz
+            Destroy(collision.gameObject);
+        }
     }
+
+    public void OnTokenCollected(int tokenValue)
+    {
+        // Aquí defines qué hacer cuando el jugador recolecta un token
+        // Por ejemplo, insertar el valor en el árbol:
+
+        int playerIndex = GetPlayerIndex();  // o un índice fijo si es un solo jugador
+        ChallengeManager.Instance.CollectToken(playerIndex, tokenValue);
+    }
+
+    public int GetPlayerIndex()
+    {
+        return 1;
+    }
+
+    public Vector2 GetFacingDirection()
+    {
+        return transform.localScale.x > 0 ? Vector2.left : Vector2.right;
+    }
+
+    public void AddForce(Vector2 force)
+    {
+        m_body2d.AddForce(force, ForceMode2D.Impulse);
+    }
+
 }

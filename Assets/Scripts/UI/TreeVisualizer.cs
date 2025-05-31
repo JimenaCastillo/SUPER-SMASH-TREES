@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -10,78 +9,67 @@ public class TreeVisualizer : MonoBehaviour
     [SerializeField] private RectTransform treeContainer;
     [SerializeField] private float horizontalSpacing = 50f;
     [SerializeField] private float verticalSpacing = 40f;
-    [SerializeField] private LineRenderer lineRendererPrefab;
+    [SerializeField] private GameObject lineImagePrefab; // Nuevo prefab de línea UI
 
     private List<GameObject> nodeObjects = new List<GameObject>();
-    private List<LineRenderer> lineRenderers = new List<LineRenderer>();
+    private List<GameObject> lineObjects = new List<GameObject>();
+    private int inOrderX = 0;
 
     public void UpdateTreeVisualization(ITree tree)
     {
         ClearVisualization();
-
         if (tree == null) return;
 
         List<TreeNode> nodes = tree.GetNodes();
 
-        // For BST and AVL visualization, use a recursive approach
         if (tree.GetTreeType() == TreeType.BST || tree.GetTreeType() == TreeType.AVL)
         {
-            // Extract the root node (if available)
             TreeNode root = nodes.Count > 0 ? nodes[0] : null;
             if (root != null)
             {
-                // Calculate positions for each node recursively
-                Dictionary<TreeNode, Vector2> nodePositions = new Dictionary<TreeNode, Vector2>();
-                CalculateNodePositions(root, 0, 0, nodePositions);
+                inOrderX = 0;
+                float containerCenterX = (treeContainer.rect.width / 2f) - 40f; // más a la izquierda
+                float verticalOffsetY = 240f; // más arriba
 
-                // Create visual nodes and connections
+                Dictionary<TreeNode, Vector2> nodePositions = new Dictionary<TreeNode, Vector2>();
+                CalculateNodePositions(root, 0, nodePositions, containerCenterX, verticalOffsetY);
+
                 CreateVisualNodes(root, nodePositions);
             }
         }
-        // For B-Tree, use a level-based approach
         else if (tree.GetTreeType() == TreeType.BTree)
         {
-            // Special visualization for B-Trees
-            if (nodes.Count > 0)
+            // Visualización simple para B-Tree
+            float yPos = 0;
+            float xPos = 0;
+
+            foreach (TreeNode node in nodes)
             {
-                float yPos = 0;
-                float xPos = 0;
+                GameObject nodeObj = CreateNodeObject(node.Value.ToString(), new Vector2(xPos, yPos));
+                nodeObjects.Add(nodeObj);
 
-                foreach (TreeNode node in nodes)
+                xPos += horizontalSpacing;
+                if (xPos > treeContainer.rect.width - horizontalSpacing)
                 {
-                    GameObject nodeObj = CreateNodeObject(node.Value.ToString(), new Vector2(xPos, yPos));
-                    nodeObjects.Add(nodeObj);
-
-                    xPos += horizontalSpacing;
-                    if (xPos > treeContainer.rect.width - horizontalSpacing)
-                    {
-                        xPos = 0;
-                        yPos -= verticalSpacing;
-                    }
+                    xPos = 0;
+                    yPos -= verticalSpacing;
                 }
             }
         }
     }
 
-    private void CalculateNodePositions(TreeNode node, int level, int position, Dictionary<TreeNode, Vector2> nodePositions)
+    private void CalculateNodePositions(TreeNode node, int level, Dictionary<TreeNode, Vector2> nodePositions, float centerOffsetX, float verticalOffsetY)
     {
         if (node == null) return;
 
-        float xPos = position * horizontalSpacing;
+        CalculateNodePositions(node.Left, level + 1, nodePositions, centerOffsetX, verticalOffsetY);
+
+        float xPos = inOrderX * horizontalSpacing;
         float yPos = -level * verticalSpacing;
+        nodePositions[node] = new Vector2(xPos + centerOffsetX, yPos + verticalOffsetY); // 👈 APLICAMOS offset vertical
+        inOrderX++;
 
-        nodePositions[node] = new Vector2(xPos, yPos);
-
-        // Calculate positions for children
-        if (node.Left != null)
-        {
-            CalculateNodePositions(node.Left, level + 1, position * 2 - 1, nodePositions);
-        }
-
-        if (node.Right != null)
-        {
-            CalculateNodePositions(node.Right, level + 1, position * 2 + 1, nodePositions);
-        }
+        CalculateNodePositions(node.Right, level + 1, nodePositions, centerOffsetX, verticalOffsetY);
     }
 
     private void CreateVisualNodes(TreeNode node, Dictionary<TreeNode, Vector2> nodePositions)
@@ -92,18 +80,17 @@ public class TreeVisualizer : MonoBehaviour
         GameObject nodeObj = CreateNodeObject(node.Value.ToString(), nodePos);
         nodeObjects.Add(nodeObj);
 
-        // Create lines to children
         if (node.Left != null)
         {
             Vector2 leftPos = nodePositions[node.Left];
-            CreateLine(nodePos, leftPos);
+            CreateLineBetween(nodePos, leftPos);
             CreateVisualNodes(node.Left, nodePositions);
         }
 
         if (node.Right != null)
         {
             Vector2 rightPos = nodePositions[node.Right];
-            CreateLine(nodePos, rightPos);
+            CreateLineBetween(nodePos, rightPos);
             CreateVisualNodes(node.Right, nodePositions);
         }
     }
@@ -124,14 +111,22 @@ public class TreeVisualizer : MonoBehaviour
         return nodeObj;
     }
 
-    private void CreateLine(Vector2 start, Vector2 end)
+    private void CreateLineBetween(Vector2 start, Vector2 end)
     {
-        LineRenderer line = Instantiate(lineRendererPrefab, treeContainer);
-        line.positionCount = 2;
-        line.SetPosition(0, new Vector3(start.x, start.y, 0));
-        line.SetPosition(1, new Vector3(end.x, end.y, 0));
+        GameObject lineObj = Instantiate(lineImagePrefab, treeContainer);
+        RectTransform lineRect = lineObj.GetComponent<RectTransform>();
 
-        lineRenderers.Add(line);
+        Vector2 direction = end - start;
+        float distance = direction.magnitude;
+        Vector2 center = start + direction / 2;
+
+        lineRect.anchoredPosition = center;
+        lineRect.sizeDelta = new Vector2(lineRect.sizeDelta.x, distance); // Width stays the same, height = distance
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        lineRect.rotation = Quaternion.Euler(0, 0, angle - 90); // Correct rotation
+
+        lineObj.SetActive(true);
+        lineObjects.Add(lineObj);
     }
 
     private void ClearVisualization()
@@ -142,10 +137,10 @@ public class TreeVisualizer : MonoBehaviour
         }
         nodeObjects.Clear();
 
-        foreach (LineRenderer line in lineRenderers)
+        foreach (GameObject lineObj in lineObjects)
         {
-            Destroy(line.gameObject);
+            Destroy(lineObj);
         }
-        lineRenderers.Clear();
+        lineObjects.Clear();
     }
 }
